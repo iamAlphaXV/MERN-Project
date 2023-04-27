@@ -1,8 +1,15 @@
 import 'dotenv/config'
 import express, { NextFunction, Request, Response } from "express";
-import NoteModel from './models/note'
+import notesRoutes from "./routes/notes";
+import morgan from 'morgan'
 
 const app = express();
+
+app.use(morgan('dev'))
+
+app.use(express.json())
+
+app.use('/api/notes', notesRoutes)
 
 
 
