@@ -6,7 +6,12 @@ interface NoteProps {
 }
 
 function Notes({ note }: NoteProps) {
-  return <div>Notes</div>;
+  return (
+    <div className=" flex content-center justify-center border border-slate-400 m-5 ">
+      {" "}
+      {note.title} {note.text}
+    </div>
+  );
 }
 
 export default Notes;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Note as NoteModel } from "./models/notes";
-import Notes from "./components/Note";
+import Note from "./components/Note";
 
 function App() {
   const [notes, setNotes] = React.useState<NoteModel[]>([]);
@@ -26,8 +26,8 @@ function App() {
       <h1 className="text-3xl">This is a test </h1>
       {JSON.stringify(notes)}
 
-      {notes.map(note => (
-        <
+      {notes.map((note) => (
+        <Note note={note} key={note._id} />
       ))}
     </div>
   );
