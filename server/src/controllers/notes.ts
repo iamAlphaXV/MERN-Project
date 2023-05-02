@@ -105,31 +105,31 @@ export const updateNote: RequestHandler<
   }
 };
 
-// export const deleteNote: RequestHandler = async (req, res, next) => {
-//     const noteId = req.params.noteId;
-//     const authenticatedUserId = req.session.userId;
+export const deleteNote: RequestHandler = async (req, res, next) => {
+  const noteId = req.params.noteId;
+  // const authenticatedUserId = req.session.userId;
 
-//     try {
-//         assertIsDefined(authenticatedUserId);
+  try {
+    // assertIsDefined(authenticatedUserId);
 
-//         if (!mongoose.isValidObjectId(noteId)) {
-//             throw createHttpError(400, "Invalid note id");
-//         }
+    if (!isValidObjectId(noteId)) {
+      throw createHttpError(400, "Invalid note id");
+    }
 
-//         const note = await NoteModel.findById(noteId).exec();
+    const note = await NoteModel.findById(noteId).exec();
 
-//         if (!note) {
-//             throw createHttpError(404, "Note not found");
-//         }
+    if (!note) {
+      throw createHttpError(404, "Note not found");
+    }
 
-//         if (!note.userId.equals(authenticatedUserId)) {
-//             throw createHttpError(401, "You cannot access this note");
-//         }
+    // if (!note.userId.equals(authenticatedUserId)) {
+    //   throw createHttpError(401, "You cannot access this note");
+    // }
 
-//         await note.remove();
+    await note.deleteOne();
 
-//         res.sendStatus(204);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};
